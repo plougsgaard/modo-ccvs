@@ -1,0 +1,26 @@
+{
+  "name": "modo-ccvs",
+  "version": "0.1.0",
+  "homepage": "https://github.com/plougsgaard/modo",
+  "authors": [
+    "plougsgaard <thomas@plougsgaard.dk>"
+  ],
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules"
+  ],
+  "devDependencies": {
+    "style-loader": "~0.8.2",
+    "css-loader": "~0.9.0",
+    "lodash": "~2.4.1"
+  },
+  "dependencies": {
+    "requirejs": "latest",
+    "underscore": "latest",
+    "react": "latest",
+    "reqwest": "latest",
+    "idb-wrapper": "latest",
+    "lodash": "~2.4.1"
+  }
+}
