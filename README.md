@@ -16,7 +16,7 @@ cd client
 
 The client expects to find a file `env.js` in the client root with this format
 
-``
+```
 module.exports = {
     development: {
         HOST: "http://localhost:8000"
@@ -25,7 +25,7 @@ module.exports = {
         HOST: "http://example.com:8000"
     }
 };
-``
+```
 
 ### Then
 
@@ -37,9 +37,9 @@ $ npm install
 
 Build development version..
 
-``
+```
 $ BUILD_ENV=development webpack
-``
+```
 
 ..or the production version
 
