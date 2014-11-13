@@ -1,0 +1,157 @@
+@import "http://yui.yahooapis.com/pure/0.5.0/pure-min.css";
+@import "http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css";
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2.65em;
+}
+
+h2 {
+    font-size: 1.93em;
+}
+
+h3 {
+    font-size: 1.67em;
+    margin: 1em 0 0.3em 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    text-rendering: optimizeLegibility;
+    font-weight: 300;
+}
+
+div.header {
+    max-width: 50em;
+    margin: 0 auto;
+    padding: 1em;
+
+    font-family: "omnes-pro", sans-serif;
+
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+div.container {
+    max-width: 70em;
+    margin: 0 auto;
+
+    padding: 1em;
+}
+
+div.waiting {
+    max-width: 30em;
+    margin: 0 auto;
+    text-align: center;
+}
+
+div.upload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    font-size:400%;
+}
+
+div.upload > span {
+
+}
+
+div.upload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+
+    height: 100%;
+    width: 100%;
+}
+
+table.white {
+    background-color: white;
+}
+
+pre,
+code {
+    font-family: Consolas, 'Liberation Mono', Courier, monospace;
+    color: #333;
+    background: rgb(250, 250, 250);
+}
+
+code {
+    padding: 0.2em 0.4em;
+    white-space: nowrap;
+}
+.container p code {
+    font-size: 90%;
+}
+
+.code {
+    margin-left: -1em;
+    margin-right: -1em;
+    padding: 1em;
+    border: 1px solid #eee;
+    border-left-width: 0;
+    border-right-width: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.code code {
+    font-size: 95%;
+    white-space: pre;
+    word-wrap: normal;
+    padding: 0;
+    background: none;
+}
+.code-wrap code {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+a:visited {
+    color: #265778;
+}
+a {
+    color: #3b8bba;
+    text-decoration: none;
+}
+
+a.inline-button {
+    background-color: #3b8bba;
+    padding: 0.1em 0.2em;
+    color: #fff;
+}
+
+.pure-u-1 {
+    padding: 0 0.4em;
+}
+
+th.highlight {
+    cursor: pointer;
+    background-color: #e0f2be;
+}
+
+th.normal {
+    cursor: pointer;
+}
+
+th.normal:hover {
+    color: #EE5757;
+}
