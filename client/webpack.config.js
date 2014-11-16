@@ -1,16 +1,15 @@
 var webpack = require("webpack");
 
-var _ = require("lodash");
-var prodEnv = require("./env").production;
-var devEnv = require("./env").development;
+var env =
+    process.env.BUILD_ENV === "production" && require("./env").production ||
+    process.env.BUILD_ENV === "development" && require("./env").development;
 
-var envName = process.env.BUILD_ENV;
-var allowedEnvironments = ["production", "development"];
-if (!_.contains(allowedEnvironments, process.env.BUILD_ENV)) {
-    envName = "development";
+if (!env) {
+    console.log("Missing `BUILD_ENV`. Example: BUILD_ENV=production webpack");
+    return;
 }
 
-var sharedConfig = {
+var config = {
     entry: {
         entry: "./entry.js",
         vendor: ["react", "reqwest", "underscore", "idb-wrapper"]
@@ -20,40 +19,16 @@ var sharedConfig = {
         filename: "[name].js"
     },
     module: {
-        loaders: [
-            { test: /\.css$/, loader: "style!css" }
-        ]
+        loaders: [ {test: /\.css$/, loader: "style!css"} ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js")
+        new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js"),
+        new webpack.DefinePlugin({
+            // The React library will omit warnings/debug code when this is `production`
+            "process.env.NODE_ENV": JSON.stringify(process.env.BUILD_ENV),
+            __HOST__: JSON.stringify(env.HOST)
+        })
     ]
 };
 
-var devConfig = {
-    entry: sharedConfig.entry,
-    output: sharedConfig.output,
-    module: sharedConfig.module,
-    plugins: _.union(sharedConfig.plugins, [
-        new webpack.DefinePlugin({ __HOST__: JSON.stringify(devEnv.HOST) })
-    ])
-};
-
-var prodConfig = {
-    entry: sharedConfig.entry,
-    output: sharedConfig.output,
-    module: _.extend(_.cloneDeep(sharedConfig.module),
-        { noParse: /react\.min\.js$/ }),
-    plugins: _.union(sharedConfig.plugins, [
-        new webpack.DefinePlugin({ __HOST__: JSON.stringify(prodEnv.HOST) }),
-        new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
-    ]),
-    resolve: {
-        alias: {
-            "react": __dirname.concat("/node_modules/react/dist/react.min.js")
-        }
-    }
-};
-//{ unused: false, warnings: false }
-module.exports =
-    envName == "development" && devConfig ||
-    envName == "production" && prodConfig;
+module.exports = config;

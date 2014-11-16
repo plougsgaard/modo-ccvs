@@ -116,10 +116,10 @@ var Main = React.createClass({
                     React.DOM.label({forName: "nameFilter"}, "Name"),
                     React.DOM.input({id: "nameFilter", value: this.state.nameFilter, onChange: this.updateNameFilter, placeholder: "Card name"})),
                 React.DOM.div({className: "pure-control-group"},
-                    React.DOM.label({forName: "priceFilter"}, "Price \u2265"),
+                    React.DOM.label({forName: "priceFilter"}, "Price"),
                     React.DOM.input({id: "priceFilter", value: this.state.minPriceFilter, onChange: this.updatePriceFilter, placeholder: "Minimum price"})),
                 React.DOM.div({className: "pure-control-group"},
-                    React.DOM.label({forName: "countFilter"}, "Count \u2265"),
+                    React.DOM.label({forName: "countFilter"}, "Count"),
                     React.DOM.input({id: "countFilter", value: this.state.minCountFilter, onChange: this.updateCountFilter, placeholder: "Minimum #"}))));
 
         var cardTable = React.DOM.div({className: "pure-u-lg-1-2 pure-u-1"},
