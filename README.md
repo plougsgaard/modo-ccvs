@@ -3,7 +3,7 @@
 A simple client/server pair that organizes and presents information
 about the user's **Magic: the Gathering™ Online** card collection.
 
-# Installation
+# Setup and Building
 
 ## Client
 
@@ -53,7 +53,6 @@ Use the `-p` flag to produce minified code for either version.
 $ BUILD_ENV=production webpack -p
 ```
 
-
 ### Now
 
 The build outputs to `dist/` and can be tested by running `index.html`. Before doing that however we need a working server.
@@ -79,6 +78,16 @@ $ HOST=http://example.com FILE_ROOT=http://example.com/files/ node scraper.js
 
 * **HOST**: The host serving the client's static HTML/JS
 * **FILE_ROOT**: The place the server can find the various data it needs such as price data
+
+# Development mode *(watch mode)*
+
+Since the default *watch mode* of **webpack** currently isn't working the config is set to using `NewWatchingPlugin` -- which works.
+
+```
+$ BUILD_ENV=development webpack-dev-server --watch
+```
+
+Then browse to `http://localhost:8080/` and start developing.
 	
 # Features
 

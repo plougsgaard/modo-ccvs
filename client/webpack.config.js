@@ -24,10 +24,12 @@ var config = {
     plugins: [
         new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js"),
         new webpack.DefinePlugin({
-            // The React library will omit warnings/debug code when this is `production`
+            // the React library will omit warnings/debug code when this is `production`
             "process.env.NODE_ENV": JSON.stringify(process.env.BUILD_ENV),
+            // populates the magic __HOST__ constant
             __HOST__: JSON.stringify(env.HOST)
-        })
+        }),
+        new webpack.NewWatchingPlugin()
     ]
 };
 
