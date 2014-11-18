@@ -3,7 +3,7 @@
 A simple client/server pair that organizes and presents information
 about the user's **Magic: the Gathering™ Online** card collection.
 
-# Installation
+# Setup and Building
 
 ## Client
 
@@ -47,19 +47,28 @@ $ BUILD_ENV=development webpack
 $ BUILD_ENV=production webpack
 ```
 
+Use the `-p` flag to produce minified code for either version.
+
+```
+$ BUILD_ENV=production webpack -p
+```
+
 ### Now
 
-Now whichever version you decided to build resides in the `dist/` directory referenced by `index.html`. But to actually function it will need a working server.
+The build outputs to `dist/` and can be tested by running `index.html`. Before doing that however we need a working server.
 
 ## Server
 
-The server doesn't actually need to be built. It just needs to run with some environment variables set. First install the dependencies.
+
+First install the dependencies.
 
 ```
 $ npm install
 ```
 
 ### Example
+
+Then run it like this.
 
 ```
 $ HOST=http://example.com FILE_ROOT=http://example.com/files/ node scraper.js 
@@ -69,6 +78,16 @@ $ HOST=http://example.com FILE_ROOT=http://example.com/files/ node scraper.js
 
 * **HOST**: The host serving the client's static HTML/JS
 * **FILE_ROOT**: The place the server can find the various data it needs such as price data
+
+# Development mode *(watch mode)*
+
+Since the default *watch mode* of **webpack** currently isn't working the config is set to using `NewWatchingPlugin` -- which works.
+
+```
+$ BUILD_ENV=development webpack-dev-server --watch
+```
+
+Then browse to `http://localhost:8080/` and start developing.
 	
 # Features
 
@@ -83,6 +102,7 @@ The server serves card price lists aggregated from third party sites since the c
 * [idb-wrapper](https://github.com/jensarps/IDBWrapper)
 * [lodash](https://github.com/lodash/lodash)
 * [reqwest](https://github.com/ded/reqwest)
+* [webpack](https://github.com/webpack/webpack)
 
 ## Server
 * [underscore](https://github.com/jashkenas/underscore)

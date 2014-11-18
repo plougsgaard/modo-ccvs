@@ -125,9 +125,6 @@ code {
     word-wrap: break-word;
 }
 
-a:visited {
-    color: #265778;
-}
 a {
     color: #3b8bba;
     text-decoration: none;
