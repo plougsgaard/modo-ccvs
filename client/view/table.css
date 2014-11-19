@@ -1,0 +1,16 @@
+table.white {
+    background-color: white;
+}
+
+th.highlight {
+    cursor: pointer;
+    background-color: #e0f2be;
+}
+
+th.normal {
+    cursor: pointer;
+}
+
+th.normal:hover {
+    color: #EE5757;
+}

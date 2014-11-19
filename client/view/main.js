@@ -3,13 +3,12 @@ var _ = require("underscore");
 var reqwest = require("reqwest");
 var IndexedDBStore = require("idb-wrapper");
 
-var SiteHeader = React.createFactory(require("./views").SiteHeader);
-var LoadingScreen = React.createFactory(require("./views").LoadingScreen);
-var UploadForm = React.createFactory(require("./views").UploadForm);
+var SiteHeader = React.createFactory(require("./common").SiteHeader);
+var LoadingScreen = React.createFactory(require("./common").LoadingScreen);
+var UploadForm = React.createFactory(require("./upload").UploadForm);
 var PriceTable = React.createFactory(require("./table").PriceTable);
 
 var service = require("./service");
-var settings = require("./settings");
 
 var Main = React.createClass({
     getInitialState: function () {
@@ -26,7 +25,8 @@ var Main = React.createClass({
         };
     },
     componentWillMount: function () {
-        reqwest({ url: settings.host, type: "json" }).then(this.parsePrices);
+        reqwest({url: __HOST__ /* magic */,
+            type: "json"}).then(this.parsePrices);
         this.setState({ store: new IndexedDBStore({
             dbVersion: 1,
             storeName: "modocollection",

@@ -1,0 +1,11 @@
+div.waiting {
+    max-width: 30em;
+    margin: 0 auto;
+    text-align: center;
+}
+
+a.inline-button {
+    background-color: #3b8bba;
+    padding: 0.1em 0.2em;
+    color: #fff;
+}

@@ -1,6 +1,8 @@
 var React = require("react");
 var _ = require("underscore");
 
+require("./table.css");
+
 var signature = { name: "name", count: "count", price: "price", sum: "sum" };
 
 var PriceTable = React.createClass({
