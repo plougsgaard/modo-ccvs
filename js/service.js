@@ -1,4 +1,4 @@
-var _ = require("underscore");
+import _ from 'lodash'
 
 /**
  * Reads XML document line by line extracting {name,count} pairs.
@@ -6,7 +6,7 @@ var _ = require("underscore");
  * @param s XML document that has elements with `Quantity` and `Name` attributes
  * @returns an array like this [{name, count}] without repeat names
  */
-var parseCollection = function (s) {
+export const parseCollection = (s) => {
     var regex = /.*Quantity="(\d+)".*Name="(.+)".*/i;
     return _.chain(s.split(/[\r\n]+/g))
         .map(function (line) {
@@ -26,7 +26,7 @@ var parseCollection = function (s) {
             };
         })
         .value();
-};
+}
 
 /**
  * Finds a sorted list of prices for each card in the collection that has one of more prices
@@ -36,30 +36,22 @@ var parseCollection = function (s) {
  * @param prices [{name, price}] with possible repeat names
  * @returns an array like this [{name, count, [price]}]
  */
-var consolidateCollection = function (collection, prices) {
-    return _.chain(collection)
-        .union(prices)
-        .groupBy("name")
-        .filter(function (b) {
-            return !!b;
-        })
-        .map(function (b) {
-            var c = _.find(b, function (m) {
-                return !!m.name && !!m.count;
-            });
-            return c && {
-                name: c.name,
-                count: c.count,
-                price: _.chain(b).without(c).pluck("price").value().sort()
-            };
-        })
-        .filter(function (b) {
-            return !!b && _.size(b.price) > 0;
-        })
-        .value();
-};
-
-module.exports = {
-    parseCollection: parseCollection,
-    consolidateCollection: consolidateCollection
-};
+export const consolidateCollection = (collection, prices) =>
+  _.chain(collection)
+      .union(prices)
+      .groupBy("name")
+      .reject(_.isEmpty)
+      .map(function (b) {
+          var c = _.find(b, function (m) {
+              return !!m.name && !!m.count;
+          });
+          return c && {
+              name: c.name,
+              count: c.count,
+              price: _.chain(b).without(c).pluck("price").value().sort()
+          };
+      })
+      .filter(function (b) {
+          return !!b && _.size(b.price) > 0;
+      })
+      .value()
