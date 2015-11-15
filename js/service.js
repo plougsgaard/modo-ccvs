@@ -1,4 +1,4 @@
-var _ = require("underscore");
+var _ = require("lodash");
 
 /**
  * Reads XML document line by line extracting {name,count} pairs.
