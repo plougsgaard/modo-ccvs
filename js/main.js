@@ -16,7 +16,8 @@ const SITES = ["special", "standard", "modern_one", "modern_two", "legacy_one", 
 
 const loadSite = (site, callback) => {
   reqwest({ url: site }).then((response) => {
-    return callback(null, response.response)
+    // reqwest is actually inconsistent - sometimes response has a response
+    return callback(null, response.response || response)
   })
 }
 
