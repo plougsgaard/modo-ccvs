@@ -1,22 +1,16 @@
-import React from 'react'
-import { Component } from 'react'
-
-import { SERVER_HOST } from './settings'
-
+import React, { Component } from 'react'
 import cheerio from 'cheerio'
 import async from 'async'
+import _ from 'lodash'
+import reqwest from 'reqwest'
+import IndexedDBStore from 'idb-wrapper'
 
-var _ = require("lodash");
-var reqwest = require("reqwest");
-var IndexedDBStore = require("idb-wrapper");
+import { parseCollection, consolidateCollection } from './service'
 
 var SiteHeader = React.createFactory(require("./views").SiteHeader);
 var LoadingScreen = React.createFactory(require("./views").LoadingScreen);
 var UploadForm = React.createFactory(require("./views").UploadForm);
 var PriceTable = React.createFactory(require("./table").PriceTable);
-
-var service = require("./service");
-var settings = require("./settings");
 
 const SITES = ["special", "standard", "modern_one", "modern_two", "legacy_one", "legacy_two", "vintage", "ignore"]
 
@@ -77,7 +71,7 @@ class Main extends Component {
       () => {
         this.state.store.getAll(function (ls) {
           this.setState({
-            collection: _.size(ls) > 0 && service.consolidateCollection(_.last(ls), this.state.prices),
+            collection: _.size(ls) > 0 && consolidateCollection(_.last(ls), this.state.prices),
             storeLoading: false
           })
         }.bind(this),
@@ -88,7 +82,7 @@ class Main extends Component {
       })
 
   handleCollectionLoaded = (userCollectionString) => {
-    var c = service.consolidateCollection(service.parseCollection(userCollectionString), this.state.prices);
+    var c = consolidateCollection(parseCollection(userCollectionString), this.state.prices);
     this.setState({ collection: c });
     this.state.store.clear(function (msg) {
       this.state.store.put(c, function (key) {}, function (err) {});
